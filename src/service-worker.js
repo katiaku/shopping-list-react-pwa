@@ -73,10 +73,15 @@ self.addEventListener('message', (event) => {
 // const version = "app-shopping-v8";
 
 self.addEventListener('install', event => {
-  console.log('Installing new version');
+  console.log('Installing New Version');
   self.ServiceWorkerRegistration.showNotification("New Version Available!", { body: "Install Now!" })
 });
 
 self.addEventListener('activate', event => {
-  console.log('New version activated')
+  console.log('New Version Activated')
 });
+
+self.addEventListener('push', event => {
+  const { title, message } = event.data.json();
+  self.registration.showNotification(title, { body: message });
+})

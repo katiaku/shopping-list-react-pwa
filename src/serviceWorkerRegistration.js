@@ -10,6 +10,8 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 
+import axios from 'axios';
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -62,10 +64,16 @@ function registerValidSW(swUrl, config) {
     .register(swUrl)
     .then((registration) => {
       registration.pushManager.getSubscription()
-        .then(async sub => await registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: vapidKeys.publicKey
-        }))
+        .then(async sub => {
+          const pushSubscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: vapidKeys.publicKey
+          });
+          // Send to server
+          await axios.post('http://localhost:8000/subscription', {
+            pushSubscription
+          })
+        })
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
