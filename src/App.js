@@ -18,9 +18,9 @@ const App = (props) => {
     <div className="App">
       <header className="App-header">
         <h1>Shopping List v8</h1>
-        {newServiceWorkerDetected && <div style={{ backgroundColor: 'red', marginBottom: 20 }}>
+        {newServiceWorkerDetected && <div style={{ backgroundColor: 'red', marginBottom: 20, padding: 20 }}>
           <h3>New Actualization Available</h3>
-          <button onClick={ onLoadNewServiceWorkerAccept }>Actualize Now!</button>
+          <button onClick={ onLoadNewServiceWorkerAccept } style={{ padding: 15 }}>Actualize Now!</button>
         </div>}
         <input style={{ fontSize: 24 }} type='text' onKeyPress={e => e.key === 'Enter' && addNewItem()} onChange={e => setNewItem(e.target.value)} value={newItem} />
         <button style={{ fontSize: 24 }} onClick={addNewItem}>Add</button>
