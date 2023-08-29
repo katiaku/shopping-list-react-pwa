@@ -17,7 +17,7 @@ const App = (props) => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Shopping List v8</h1>
+        <h1>Shopping List</h1>
         {newServiceWorkerDetected && <div style={{ backgroundColor: 'red', marginBottom: 20, padding: 20 }}>
           <h3>New Actualization Available</h3>
           <button onClick={ onLoadNewServiceWorkerAccept } style={{ padding: 15 }}>Actualize Now!</button>

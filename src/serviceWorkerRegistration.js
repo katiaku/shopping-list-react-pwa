@@ -18,6 +18,11 @@ const isLocalhost = Boolean(
     window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
+const vapidKeys = {
+  publicKey: "BJ7oPFz6nH60tZYqw0ccdh4h28Bf6-Yujvij7BgMv0kRlRTSCkL1oPFBKQISRtS0uNRR249nWK4I-GfEPdvhCtc",
+  privateKey: "5wGMH_OOjeFL03YbFC7SP6fJulbTfoEuxuNW37EURag"
+}
+
 export function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -56,6 +61,11 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      registration.pushManager.getSubscription()
+        .then(async sub => await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: vapidKeys.publicKey
+        }))
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
