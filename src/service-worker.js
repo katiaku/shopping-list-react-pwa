@@ -70,3 +70,12 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+const version = "app-shopping-v8";
+
+self.addEventListener('install', event => {
+  console.log(`Installing version ${version}`)
+});
+
+self.addEventListener('activate', event => {
+  console.log(`Active version ${version}`)
+});
